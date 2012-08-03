@@ -1,0 +1,39 @@
+package jomp;
+
+import jomp.runtime.OMP;
+
+public class MultiplicaMatrizOMP {
+
+	public static void main(String[] args) {
+
+		int matriz[][] = new int[3][3];
+		int i, j;
+		int myid = 0;
+		int soma = 1;
+		OMP.setNumThreads(10);
+
+		for (i = 0; i < 3; i++) {
+			for (j = 0; j < 3; j++) {
+				matriz[i][j] = 2;
+			}
+		}
+
+		//omp parallel shared(matriz) private(myid,i,j) reduction(*:soma)
+		{
+
+			myid = OMP.getThreadNum();
+
+			//omp for
+			for (i = 0; i < 3; i++) {
+				for (j = 0; j < 3; j++) {
+					soma *= matriz[i][j];
+				}
+			}
+
+			System.out.println("MYID: " + myid);
+
+		}
+		System.out.println("RESULTADO: " + soma);
+
+	}
+}

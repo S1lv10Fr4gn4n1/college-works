@@ -1,0 +1,71 @@
+html {
+	background-color : rgb(250,250,250);
+	color : rgb(0,0,0); 
+}
+
+body { 
+	width : 400px;
+	margin : 0 auto;
+	font : 75%/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif; 
+}
+ 
+h2 {
+	margin-left: 25px;
+}
+
+p {
+	margin : 0 0 0 0; 
+}
+
+label {
+	display : block;
+	float : left;
+	width : 160px;
+	margin-left : 22px; 
+}
+
+input[type="text"], select {
+	float : left;
+	background-color : rgb(255,255,255);
+	font : inherit Helvetica, Arial, sans-serif; 
+	color : rgb(0,0,0); 
+	border-top-left-radius: 5px; 
+	border-bottom-left-radius: 5px; 
+	border-top-right-radius: 5px; 
+	border-bottom-right-radius: 5px; 
+	border : 2px solid rgb(102,108,103);
+}
+
+input[type="text"] { 
+	width : 185px; 
+}
+
+select { 
+	width : 195px;
+	height: 25px
+}
+
+input[type="file"] {
+	margin-left: 22px;
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+
+img {
+ 	margin-left: 22px;
+ 	margin-top: 15px;
+	width: 100px;
+	height: 70px;
+}
+
+#message {
+	margin-left: 35px;
+	margin-bottom: 10px;
+	font-style: italic;
+	color: blue;
+}
+
+#btnSave, #btnRefresh {
+	margin-left:  22px;
+	width: 100px;
+}

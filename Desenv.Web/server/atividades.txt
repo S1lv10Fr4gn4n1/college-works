@@ -1,0 +1,91 @@
+GERENCIAMENTO DE SESSAO
+
+- implementar controle de cookes
+- IResposta.setCookie(Cookie)
+- new Cookie("nomeUsuario", "silvio");
+  - setDuracao(); default 0, quando o browser fechar, elimina
+  o tempo eh em segundos
+  
+- Cookie[] IRequisicao.getCookies()
+
+http://en.wikipedia.org/wiki/HTTP_cookie
+Set-Cookie: name=value
+Set-Cookie: name2=value2; Expires=Wed, 09 Jun 2021 10:18:14 GMT
+
+- a cada nova requisicao criada, uma sessao eh criada
+- a identificacao eh feita atravez de um cookie na requisicao
+ele verificar se toda a requisicao tem o cookie especial.
+Esse cookie eh gerado pelo servidor que identificara uma sessao, esse cookie
+nao pode ser repedido.
+
+IDEIA
+classe Session {
+	private Long id;
+	private Map<String, Object> Atributos;
+}
+
+- Session IRequisicao.getSessao(), pergunta se veio o cookie, se nao veio cria e manda o cookie
+  session.setAtributte("string", objeto);
+  object = session.getAtributte("string");
+  
+- tempo de sessao, caso passe um tempo determinado sem acesso (30 min), tira a sessao da memoria.
+- colocar no arquivo de configuracao timeout-sessao=20, que indicara o tempo da sessao da aplicacao
+
+
+_______________________________________________________________________________________________________________
+
+
+SEGURANCA
+
+- criar uma tela de login para paginas que necessitam de autenticacao de acesso
+- criar uma tela de cadastro de logins, ficara gravado em xml
+- criar paramentros para o timeout da autenticacao para 5 min e timeout para session com 1 dia.
+
+- quando a autenticacao é perdida o por timeout, o servido envia novamente a tela de login, porem a sessao nao morre.
+
+- todo cookie q vier para a requisicao, tem q devolver.
+
+- todas as paginas requisitadas será pedido o login.
+
+- um exemplo
+	- uma pagina trans.html é requisitada
+	- o servidor recebe
+	- verifica se ja esta autenticado, caso nao esteja, a tela de login será mostrada
+	- na tela de login tem q redirecionar para a pagina requisitada, com:
+		- action="login.html?R=trans.html"
+		- <input type="hiddem" value="trans.html"/>
+
+____________________________________________________________________________________________________________________________
+
+REST
+
+item 6
+- Nao pdoem ser executados por "conexao nao autenticadas"
+	toda chamada feita ao servidor tem q ver se esta autenticada
+	
+- CSS, pode pegar 
+
+- Paginacao feita por nos
+
+- tem q criar uma biblioteca com js paa ajudar
+
+Apresentacao item 9
+- criar outro servico que se comporte diferente
+
+Somente uma pagina
+
+* ter uma classe que implementa a Iresposnse que trata uma determinada  url do REST
+
+Biblioteca: MooTols
+
+REST
+transferencia representacional de estado
+
+xmlhttprequest (pegar da biblioteca)	
+overridemimetype(application/json)
+get, http://localhost:7070/webapp/mindwath
+
+// transformar para objeto
+var src = this.responseText;
+gui.mindMapObject = JSON.parse(src)
+	

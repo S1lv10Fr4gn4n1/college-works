@@ -1,0 +1,22 @@
+package JOMP;
+
+import jomp.runtime.OMP;
+
+public class Exercicio02 {
+
+	public static void main(String[] args) {
+		int i, n = 10;
+		int myid;
+		OMP.setNumThreads(2);
+
+		//omp parallel
+		{
+			//omp for
+			for (i = 0; i < n; i++) {
+				myid = OMP.getThreadNum();
+				System.out.println("Thread " + myid + ": hello do elemento "+ i);
+			}
+		}
+
+	}
+}

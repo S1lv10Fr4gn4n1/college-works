@@ -1,0 +1,62 @@
+package JOMP;
+
+import jomp.runtime.OMP;
+
+public class Exercicio07 {
+
+    public static void main(String[] args) {
+        int[][] matrizA = new int[10][10];
+        int[][] matrizB = new int[10][10];
+        int[][] matrizC = new int[10][10];
+
+        // insere valores na matriz
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                matrizA[i][j] = (int) (Math.random() * 5);
+                matrizB[i][j] = (int) (Math.random() * 5);
+            }
+        }
+
+        OMP.setNumThreads(10);
+        int linhaGrupo1;
+        int linhaGrupo2;
+        int limite1 = (int) (matrizA.length / 2);
+        int limite2 = matrizA.length;
+
+        int myid;
+        //omp parallel sections private(myid)
+        {
+        
+            //omp section
+            {
+                myid = OMP.getThreadNum();
+            
+                for (linhaGrupo1 = 0; linhaGrupo1 < limite1; linhaGrupo1++) {
+                    for (int c = 0; c < matrizA[0].length; c++) {
+                        matrizC[linhaGrupo1][c] = matrizA[linhaGrupo1][c] + matrizB[linhaGrupo1][c];
+                        System.out.println("Linha " + linhaGrupo1 + ", coluna " + c + ". (" + matrizA[linhaGrupo1][c] + "+" + matrizB[linhaGrupo1][c] + "). Myid: " + myid);
+                    }
+                }
+            }
+            
+            //omp section
+            {
+                myid = OMP.getThreadNum();
+                for (linhaGrupo2 = limite1; linhaGrupo2 < limite2; linhaGrupo2++) {
+                    for (int c = 0; c < matrizA[0].length; c++) {
+                        matrizC[linhaGrupo2][c] = matrizA[linhaGrupo2][c] + matrizB[linhaGrupo2][c];
+                        System.out.println("Linha " + linhaGrupo2 + ", coluna " + c + ". (" + matrizA[linhaGrupo2][c] + "+" + matrizB[linhaGrupo2][c] + "). Myid: " + myid);
+                    }
+                }
+            }
+        }
+        
+        // Verifica os valores no final
+        for (int linha = 0; linha < matrizC.length; linha++) {
+            for (int coluna = 0; coluna < matrizC[0].length; coluna++) {
+                System.out.println("[" + linha + "]" + "[" + coluna + "] = " + matrizC[linha][coluna]);
+            }
+        }
+    }
+
+}

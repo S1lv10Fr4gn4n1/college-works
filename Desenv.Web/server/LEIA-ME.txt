@@ -1,0 +1,30 @@
+PARA EXECUTAR O SERVER TOTALMENTE DESACOPLADO
+- exportar os projetos plugins pelo Eclipse, com a opcao export/JAR file
+- exportar o projeto server com pelo Eclipse, com a opcao export/Runnable JAR file
+(obs: o projeto server é exportado dessa forma para trazer a referencia com o pluginCommons, 
+aonde estão as classes comuns com os plugins e o server.)
+
+- quanto a estrutura de pastas para o que o servidor consegue encontrar
+    ./  = pasta raiz
+    ./mapPlugin.properties = arquivo de configuração dos plugins
+    ./mimeType.properties = arquivo com os mimes disponiveis
+    ./config.properties = configuracoes do servidor como port, pastas...
+    ./server.jar = projeto server exportado
+    ./lib/ = pasta com os jar dos projetos plugins
+    ./root/ = pasta com os arquivos disponiveis para as requisições
+
+- comando para executar
+    > java -jar server.jar
+
+obs: executar preferencialmente com o java 1.6
+
+    
+PARA EXECUTAR PELO ECLIPE
+- o projeto server tem referencia para o projeto pluginCommon para ter uso das classes
+- os projetos plugins (exceto o pluginCommon) terao referencia para o projeto pluginCommon
+- os arquivos *properties deverao esta na raiz do projeto server
+- a pasta root deverá esta na raiz do projeto server.
+- a pasta lib deverá esta na raiz do projeto server
+obs: os jar terao quer ser incluidos no buildpath, nao sei pq ele nao encontra os jars nesses caso.
+porem a total desacoplacao do projeto server com os plugins pode ser vista no primeiro tipo de execucao 
+do projeto;

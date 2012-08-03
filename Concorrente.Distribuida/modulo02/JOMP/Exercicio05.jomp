@@ -1,0 +1,48 @@
+package JOMP;
+
+import jomp.runtime.OMP;
+
+public class Exercicio05 {
+
+    public static void main(String[] args) {
+        boolean passouS1 = false;
+        boolean passouS2 = false;
+       	int myid;
+	 
+        OMP.setNumThreads(3);
+        
+        //omp parallel sections private(myid)
+        {
+            //omp section
+            {
+                 myid = OMP.getThreadNum();
+                
+                 System.out.println("Thread " + myid + ": seção 1");
+                 passouS1 = true;
+            }
+
+            //omp section
+            {
+                myid = OMP.getThreadNum();
+                
+                while (!passouS1) {
+                    System.out.println("Thread " + myid + ": seção 2 aguardando seção 1!");
+                }                
+                
+                System.out.println("Thread " + myid + ": seção 2 liberada!");
+                passouS2 = true;
+            }
+
+            //omp section
+            {
+                myid = OMP.getThreadNum();
+
+                while (!passouS2) {
+                    System.out.println("Thread " + myid + ": seção 3 aguardando seção 2!");
+                }
+
+                System.out.println("Thread " + myid + ": seção 3 liberada!");
+            }
+        }
+    }
+}

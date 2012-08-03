@@ -1,0 +1,17 @@
+package JOMP;
+
+import jomp.runtime.*;
+
+public class Exercicio01 {
+
+	public static void main(String[] args) {
+		int myid;
+		OMP.setNumThreads(10);
+		//omp parallel private(myid)
+		{
+			myid = OMP.getThreadNum();
+			System.out.println("Hello from " + myid);
+		}
+		
+	}
+}

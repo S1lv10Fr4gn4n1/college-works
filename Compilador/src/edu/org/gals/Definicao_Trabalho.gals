@@ -1,0 +1,210 @@
+#Options
+GenerateScanner = true
+GenerateParser = true
+Language = Java
+ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
+ScannerCaseSensitive = true
+ScannerTable = Compact
+Input = Stream
+Parser = LL
+#RegularDefinitions
+digito: [0-9]
+maiuscula: [A-Z]
+minuscula: [a-z]
+combinacao: ({digito} | {maiuscula}{minuscula} | {minuscula})
+caracter: ([^\s] | \s)
+caracterLiteral: [^'\n ]
+caracterComentario: [^\n]
+caracterBloco: [^}]
+barra:"/"
+comentarioLinha:  {barra}{barra}{caracterComentario}*
+comentarioBloco: "{"{caracterBloco}* "}"
+#Tokens
+palavraReservada: {minuscula}({maiuscula}{minuscula} | {minuscula})*
+
+// casos especiais de palavras reservadas
+add = palavraReservada: "add"
+as = palavraReservada: "as"
+boolean = palavraReservada: "boolean"
+break = palavraReservada: "break"
+capacity = palavraReservada:"capacity"
+case= palavraReservada:"case"
+count= palavraReservada:"count"
+def= palavraReservada:"def"
+default= palavraReservada:"default"
+delete= palavraReservada:"delete"
+elementOf= palavraReservada:"elementOf"
+false= palavraReservada:"false"
+float= palavraReservada:"float"
+int=palavraReservada:"int"
+list=palavraReservada:"list"
+loop=palavraReservada:"loop"
+main=palavraReservada:"main"
+printf=palavraReservada:"printf"
+scanf=palavraReservada:"scanf"
+string=palavraReservada:"string"
+switch=palavraReservada:"switch"
+true=palavraReservada:"true"
+
+// simbolos especiais
+"("
+")"
+"["
+"]"
+"."
+","
+":"
+"="
+"+="
+"-="
+"*="
+"=="
+"!="
+"<"
+"<="
+">"
+">="
+"||"
+"&&"
+"!"
+"+"
+"-"
+"*"
+"/"
+
+inteiro: {digito}+
+
+real: {digito}+"."{digito}{digito}?{digito}?
+
+literal: "'"{caracterLiteral}* "'" | "'" ({caracterLiteral} | "'" "'")* "'"
+
+identificador: id_({combinacao}"_" | {combinacao})+
+
+
+// aceita caracteres de formatacao
+:[\s\n\t\r]*
+// \s space
+// \t tab
+// \r return
+// \n new line
+
+// ignora os comentarios lexico
+:!{comentarioBloco}
+:!{comentarioLinha}
+
+
+// nao gerar o semanticError e o syntaticError
+#NonTerminals
+<forma_programa>
+<lista_comandos>
+<lista_comandos1>
+<declaracao_variaveis>
+<forma_variaveis>
+<forma_variaveis1>
+<comando>
+<comando1>
+<lista_identificadores>
+<lista_identificadores1>
+<tipo>
+<tipo_simples>
+<tipo_lista>
+//<forma_atribuicao>
+<operador>
+<forma_entrada>
+<forma_saida>
+<lista_expressoes>
+<lista_expressoes1>
+//<forma_manipulacao>
+//<forma_manipulacao1>
+<elemento_outro>
+<posicao>
+<forma_selecao>
+<forma_selecao1>
+<forma_switch>
+<forma_case>
+<forma_case1>
+<comando_case>
+<forma_default>
+<forma_repeticao>
+<expressao>
+<expresssao1>
+<valor>
+<relacional>
+<relacional1>
+<operador_relacional>
+<aritimetica>
+<aritimetica1>
+<termo>
+<termo1>
+<elemento>
+<elemento1>
+#Grammar
+// fatoracao eh o nao determinismo
+
+<forma_programa> ::= def main "(" ")" "[" <declaracao_variaveis> "]" "[" <lista_comandos> "]" #1;
+
+<declaracao_variaveis> ::= î | <forma_variaveis>;
+
+<lista_comandos> ::= <comando> <lista_comandos1>;
+<lista_comandos1> ::= î | <lista_comandos>;
+
+<forma_variaveis> ::= <lista_identificadores> as <tipo> #2 "." <forma_variaveis1>;
+<forma_variaveis1> ::= î | <forma_variaveis>;
+
+<lista_identificadores> ::= identificador #4 <lista_identificadores1>;
+<lista_identificadores1> ::= î | "," <lista_identificadores>;
+
+<tipo> ::= <tipo_simples> #3 | <tipo_lista>;
+<tipo_simples> ::= int | float | string | boolean;
+<tipo_lista> ::= list "(" <tipo_simples> "," inteiro ")";
+
+<comando> ::= identificador #4 <comando1> | <forma_entrada> | <forma_saida> | <forma_selecao> | <forma_repeticao> | break "." #5;
+<comando1> ::= <operador> #6 <expressao> #7 "." | add "(" <elemento_outro> ")" "." | delete "(" <posicao> ")" ".";
+
+<operador> ::= "=" | "+=" | "-=" | "*=" ;
+
+<forma_entrada> ::= scanf "(" <lista_identificadores> #8 ")" ".";
+
+<forma_saida> ::= printf "(" <lista_expressoes> ")" ".";
+
+<lista_expressoes> ::= <expressao> #9 <lista_expressoes1>;
+<lista_expressoes1> ::=  î | "," <lista_expressoes>;
+
+<posicao> ::= <expressao>;
+
+<forma_selecao> ::= <forma_switch> <forma_selecao1>;
+<forma_selecao1> ::= "]" #10 | <forma_default> "]" #10;
+
+<forma_switch> ::= #32 switch <expressao> "[" <forma_case>;
+
+<forma_case> ::= <comando_case> <forma_case1>;
+<forma_case1> ::= î | <forma_case>;
+
+<comando_case> ::= #11 case <expressao> #12 ":" <lista_comandos> #13;
+
+<forma_default> ::= default <lista_comandos>;
+
+<forma_repeticao> ::= #14 loop "[" <lista_comandos> "]" #15;
+
+
+// regras sintáticas para o não-terminal
+
+<expressao> ::= <valor> <expresssao1>;
+<expresssao1> ::= î | "||" <valor> #16 <expresssao1> | "&&" <valor> #17 <expresssao1>;
+
+<valor> ::= <relacional> | true #18 | false #19 | "!" <valor> #20;
+<relacional> ::= <aritimetica> <relacional1>;
+<relacional1> ::= <operador_relacional> #21 <aritimetica> #22 | î;
+
+<operador_relacional> ::= "==" | "!=" | "<" | "<=" | ">" | ">=";
+
+<aritimetica> ::= <termo> <aritimetica1>;
+<aritimetica1> ::= î | "+" <termo> #23 <aritimetica1> | "-" <termo> #24 <aritimetica1>;
+
+<termo> ::= <elemento> <termo1>;
+<termo1> ::= î | "*" <elemento> #25 <termo1> | "/" <elemento> #26 <termo1> ;
+
+<elemento> ::= identificador <elemento1> | inteiro #28 | real #29 | literal #30 | "(" <expressao> ")" | "+" <elemento> | "-" <elemento> #31;  
+<elemento1> ::= #27 î | capacity | count | elementOf "(" <expressao> ")" ;

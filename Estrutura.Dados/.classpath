@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Unidade_1"/>
+	<classpathentry kind="src" path="Unidade_2"/>
+	<classpathentry kind="src" path="Unidade_3"/>
+	<classpathentry kind="src" path="Unidade_4"/>
+	<classpathentry kind="src" path="Unidade_5"/>
+	<classpathentry kind="src" path="Unidade_6"/>
+	<classpathentry kind="src" path="Unidade_7"/>
+	<classpathentry kind="src" path="material_estudo"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

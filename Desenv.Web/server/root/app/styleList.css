@@ -1,0 +1,44 @@
+body {
+    background-color: #FFFFFF;
+    color: #333333;
+    text-align: center;
+}
+
+button{
+	height: 25px;
+	width:  80px;
+	font-weight: bold;
+	border-style: groove;
+}
+
+input {
+	font-size: 10px;
+}
+
+a {
+	margin-left: 20px;
+	cursor: pointer;
+	cursor: hand;
+}
+
+#divWrapper {
+    background-color: #FFFFFF;
+    margin: 0 auto;
+    border-color: gray;
+    text-align: left;
+    width: 650px;
+}
+
+#divButtons {
+	height:10px;
+	border: 2px;
+	margin-bottom: 10px;
+}
+
+#divTitle {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    font-size: 20px;
+}
+

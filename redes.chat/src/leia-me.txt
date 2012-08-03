@@ -1,0 +1,4 @@
+- ter GTK >= 2.0 publicado no ambiente (foi testado usando Fedora13/Ubuntu[9.10-10.04] com ambiente Gnome)
+- ter Python 2.6 ou equivalente
+- para executar, somente dar duplo click no chat.py, ira pedir para abrir como texto, ou executar.
+- linha de comando: $python chat.py ou $./chat.py

@@ -1,0 +1,55 @@
+package JOMP;
+
+import jomp.runtime.OMP;
+
+
+public class Exercicio06 {
+    
+    public static void main(String[] args) {
+        int myid;
+        
+        int[][] matrizResult = new int[6][3];
+        int[][] matriz = new int[6][6];
+        
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                matriz[i][j] = 1;
+            }
+        }
+        
+        OMP.setNumThreads(2);
+        
+        //omp parallel sections private(myid)
+        {
+            //omp section
+            {
+                myid = OMP.getThreadNum();
+                
+                for (int i = 0; i < 6; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        matrizResult[i][j] += matriz[i][j];
+                        System.out.println("thread " + myid + ", valor: " + matriz[i][j] + ", matriz " + i + ", " + j);
+                    }
+                }
+            }
+            
+            //omp section
+            {
+            	myid = OMP.getThreadNum();
+            	
+                for (int i = 0; i < 6; i++) {
+                    for (int j = 2; j < 6; j++) {
+                        matrizResult[i][j/2] += matriz[i][j];
+                        System.out.println("thread " + myid + ", valor: " + matriz[i][j] + ", matriz " + i + ", " + j);
+                    }
+                }
+            }
+        }
+        
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+            	System.out.println("Valor MatrizResult: " + matrizResult[i][j] + ", matriz " + i + ", " + j);
+            }
+		}
+    }
+}

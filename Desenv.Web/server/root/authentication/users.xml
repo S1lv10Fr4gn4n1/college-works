@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><users-web>
+	<users>
+		<user login="silvio" name="Silvio Fragnani" pass="123"/>
+		<user login="tibut" name="Tibutcio" pass="abc"/>
+	    <user login="aba" name="abacate" pass="123"/>
+	 <user login="aba" name="abacate" pass="123"/><user login="aba" name="abacate" pass="123"/><user login="aba" name="abacate" pass="123"/><user login="aba" name="abacate" pass="123"/><user login="aba" name="abacate" pass="123"/><user login="aba" name="abacate" pass="123"/><user login="aba" name="abacate" pass="123"/></users>
+</users-web>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.16-bin.jar"/>
+	<classpathentry kind="lib" path="lib/antlr-3.2.jar"/>
+	<classpathentry kind="lib" path="lib/cglib.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/ehcache-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/ejb3-persistence.jar"/>
+	<classpathentry kind="lib" path="lib/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate-entitymanager.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="lib/json-lib-2.2.3.jar"/>
+	<classpathentry kind="lib" path="lib/jta-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-1.4.3.jar"/>
+	<classpathentry kind="lib" path="lib/persistence.jar"/>
+	<classpathentry kind="lib" path="lib/standard.jar"/>
+	<classpathentry kind="lib" path="lib/pluginGeneric.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/pluginCSS.jar"/>
+	<classpathentry kind="lib" path="lib/pluginDebug.jar"/>
+	<classpathentry kind="lib" path="lib/pluginJPG.jar"/>
+	<classpathentry kind="lib" path="lib/pluginJS.jar"/>
+	<classpathentry kind="lib" path="lib/pluginMPEG.jar"/>
+	<classpathentry kind="lib" path="lib/pluginPNG.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/pluginCommon"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
